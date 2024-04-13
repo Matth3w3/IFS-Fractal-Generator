@@ -15,6 +15,7 @@
 - Press T to change starting image to a triangle
 - Press R to change starting image to a random collection of polygons
 - Press P to reset color to blue
+- Press M to save image
 
 ### Examples
 
