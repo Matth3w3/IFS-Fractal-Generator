@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
+
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -9,6 +11,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.event.MouseInputListener;
 
 import java.awt.image.*;
+import java.io.File;
+import java.io.IOException;
 
 public class Render {
     private static final Color DEFAULT_PEN_COLOR   = Color.black;
@@ -319,6 +323,12 @@ public class Render {
     public void drawFromCurrentImage(double[][] IFSTable) {
         BufferedImage current = copyOffScreenImage();
         clear(); drawImage(makeColorTransparent(current, clearColor), IFSTable);
+    }
+
+    public void saveImage() throws IOException {
+        BufferedImage image = copyOnScreenImage();
+        File file = new File("images/image.png");
+        ImageIO.write(image, "png", file);
     }
 
     public boolean frameIsShowing() { return frame.isShowing(); }

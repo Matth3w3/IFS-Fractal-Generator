@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.event.*;
 import javax.swing.event.MouseInputListener;
 import java.awt.image.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -34,7 +35,7 @@ public class FractalGenerator implements MouseInputListener, KeyListener, Action
     int choice = 0;
     public void start() {
         render.initFrame(Color.white, true, true, "Fractals");
-        render.setClearColor(Color.white);
+        render.setClearColor(Color.black);
         reset();
         while (render.frameIsShowing()) {
             if (reset) { reset();}
@@ -55,11 +56,11 @@ public class FractalGenerator implements MouseInputListener, KeyListener, Action
     Color[] colors = new Color[]{
         Color.blue, Color.red, Color.green, Color.cyan, Color.yellow, Color.black, Color.magenta, Color.orange, Color.pink};
     boolean randomColor = false, resetColor = false;
-    Color color = Color.blue;
+    Color color = Color.white;
     public void reset() {
         render.clear();
         if (resetColor) {
-            color = Color.blue;
+            color = Color.white;
             resetColor = false;
             randomColor = false;
         }
@@ -129,6 +130,14 @@ public class FractalGenerator implements MouseInputListener, KeyListener, Action
             select = true; choice = 7;
         } else if (key == KeyEvent.VK_9) {
             select = true; choice = 8;
+        }
+
+        if (key == KeyEvent.VK_M) {
+            try {
+                render.saveImage();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         }
 
         if (key == KeyEvent.VK_0) randomColor = !randomColor;
